@@ -124,19 +124,19 @@ def player_busts():
     print("\n<--- Player busts! --->")
 
 
-def player_wins(player, dealer):
+def player_wins():
     print("\n<--- Player wins! --->")
 
 
-def dealer_busts(player, dealer):
+def dealer_busts():
     print("\n<--- Dealer busts! --->")
 
 
-def dealer_wins(player, dealer):
+def dealer_wins():
     print("\n<--- Dealer wins! --->")
 
 
-def push(player, dealer):
+def push():
     print("\nIt's a tie.")
 
 
@@ -170,7 +170,7 @@ def main():
             show_some(player_hand, dealer_hand)
 
             if player_hand.value > 21:
-                player_busts(player_hand, dealer_hand)
+                player_busts()
                 break
 
         # If there's no bust
@@ -187,16 +187,16 @@ def main():
             show_all(player_hand, dealer_hand)
 
             if dealer_hand.value > 21:
-                dealer_busts(player_hand, dealer_hand)
+                dealer_busts()
 
             elif dealer_hand.value > player_hand.value:
-                dealer_wins(player_hand, dealer_hand)
+                dealer_wins()
 
             elif dealer_hand.value < player_hand.value:
-                player_wins(player_hand, dealer_hand)
+                player_wins()
 
             else:
-                push(player_hand, dealer_hand)
+                push()
 
         new_game = input("\nWant to play another round? [Y/N]")
         while new_game.lower() not in ["y", "n"]:
@@ -212,3 +212,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
