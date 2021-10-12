@@ -77,18 +77,19 @@ class Hand:
         if card.rank == "A":
             self.aces += 1
 
-    def adjust_for_ace(self):  # Adjust for aces depending on the current hand value
+    # Adjust for aces depending on the current hand value
+    def adjust_for_ace(self):
         while self.value > 21 and self.aces:
             self.value -= 10
             self.aces -= 1
 
 
-# Define functions
 def hit(deck, hand):
     hand.add_card(deck.deal())
     hand.adjust_for_ace()
 
 
+# Conditions for hitting or standing
 def hit_or_stand(deck, hand):
     global running
 
@@ -108,6 +109,7 @@ def hit_or_stand(deck, hand):
         break
 
 
+# Shows both player cards but only one dealer card
 def show_some(player, dealer):
     print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
     print("\nDealer's hand:")
@@ -115,6 +117,7 @@ def show_some(player, dealer):
     print("", dealer.cards[1])
 
 
+# Shows all cards when the round is finished
 def show_all(player, dealer):
     print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
     print("Dealer's hand:", *dealer.cards, "Hand value:", dealer.value, sep="\n")
@@ -212,4 +215,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
