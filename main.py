@@ -84,68 +84,70 @@ class Hand:
             self.aces -= 1
 
 
-def hit(deck, hand):
-    hand.add_card(deck.deal())
-    hand.adjust_for_ace()
+class Actions:
+    @staticmethod
+    def hit(deck, hand):
+        hand.add_card(deck.deal())
+        hand.adjust_for_ace()
 
+    # Conditions for hitting or standing
+    @staticmethod
+    def hit_or_stand(deck, hand):
+        global running
 
-# Conditions for hitting or standing
-def hit_or_stand(deck, hand):
-    global running
+        while True:
+            x = input("\nStand or hit? Enter [h/s]")
 
-    while True:
-        x = input("\nStand or hit? Enter [h/s]")
+            if x[0].lower() == "h":
+                Actions.hit(deck, hand)
 
-        if x[0].lower() == "h":
-            hit(deck, hand)
+            elif x[0].lower() == "s":
+                print("Player stands. Dealer is playing.")
+                running = False
 
-        elif x[0].lower() == "s":
-            print("Player stands. Dealer is playing.")
-            running = False
+            else:
+                print("Sorry, I don't understand that. Enter [h/s]")
+                continue
+            break
 
-        else:
-            print("Sorry, I don't understand that. Enter [h/s]")
-            continue
-        break
+    # Shows both player cards but only one dealer card
+    @staticmethod
+    def show_some(player, dealer):
+        print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
+        print("\nDealer's hand:")
+        print("<hidden card>")
+        print("", dealer.cards[1])
 
+    # Shows all cards when the round is finished
+    @staticmethod
+    def show_all(player, dealer):
+        print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
+        print("Dealer's hand:", *dealer.cards, "Hand value:", dealer.value, sep="\n")
 
-# Shows both player cards but only one dealer card
-def show_some(player, dealer):
-    print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
-    print("\nDealer's hand:")
-    print("<hidden card>")
-    print("", dealer.cards[1])
+    @staticmethod
+    def player_busts():
+        print("\n<--- Player busts! --->")
 
+    @staticmethod
+    def player_wins():
+        print("\n<--- Player wins! --->")
 
-# Shows all cards when the round is finished
-def show_all(player, dealer):
-    print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
-    print("Dealer's hand:", *dealer.cards, "Hand value:", dealer.value, sep="\n")
+    @staticmethod
+    def dealer_busts():
+        print("\n<--- Dealer busts! --->")
 
+    @staticmethod
+    def dealer_wins():
+        print("\n<--- Dealer wins! --->")
 
-def player_busts():
-    print("\n<--- Player busts! --->")
-
-
-def player_wins():
-    print("\n<--- Player wins! --->")
-
-
-def dealer_busts():
-    print("\n<--- Dealer busts! --->")
-
-
-def dealer_wins():
-    print("\n<--- Dealer wins! --->")
-
-
-def push():
-    print("\nIt's a tie.")
+    @staticmethod
+    def push():
+        print("\nIt's a tie.")
 
 
 def main():
     deck = Deck()
-    print(len(deck.deck))
+    actions = Actions()
     global running
 
     while True:
@@ -156,30 +158,28 @@ def main():
             "Try getting as close to 21 as you can without going over.\nDealer hits until 17."
         )
 
-        deck = Deck()
-
         player_hand = Hand()
         dealer_hand = Hand()
         for i in range(2):
             player_hand.add_card(deck.deal())
             dealer_hand.add_card(deck.deal())
 
-        show_some(player_hand, dealer_hand)
+        actions.show_some(player_hand, dealer_hand)
 
         while running:
 
             # Ask player for input
-            hit_or_stand(deck, player_hand)
-            show_some(player_hand, dealer_hand)
+            actions.hit_or_stand(deck, player_hand)
+            actions.show_some(player_hand, dealer_hand)
 
             if player_hand.value > 21:
-                player_busts()
+                actions.player_busts()
                 break
 
         # If there's no bust
         if player_hand.value <= 21:
             while dealer_hand.value < 17:
-                hit(deck, dealer_hand)
+                actions.hit(deck, dealer_hand)
 
             # Show cards
             time.sleep(1)
@@ -187,19 +187,19 @@ def main():
             print("          * Final Results *")
             print("-----------------------------------------")
 
-            show_all(player_hand, dealer_hand)
+            actions.show_all(player_hand, dealer_hand)
 
             if dealer_hand.value > 21:
-                dealer_busts()
+                actions.dealer_busts()
 
             elif dealer_hand.value > player_hand.value:
-                dealer_wins()
+                actions.dealer_wins()
 
             elif dealer_hand.value < player_hand.value:
-                player_wins()
+                actions.player_wins()
 
             else:
-                push()
+                actions.push()
 
         new_game = input("\nWant to play another round? [Y/N]")
         while new_game.lower() not in ["y", "n"]:
