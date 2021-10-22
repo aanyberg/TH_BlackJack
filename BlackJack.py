@@ -50,7 +50,7 @@ class Card:
 class Deck:
     # Creates 6 decks of cards and shuffles all the cards
     def __init__(self):
-        self.deck = []  # Starts with an empty list
+        self.deck = []
 
         for suit in suits:
             for rank in ranks * 6:
@@ -67,7 +67,7 @@ class Deck:
 
 class Hand:
     def __init__(self):
-        self.cards = []  # Starts with an empty list
+        self.cards = []
         self.value = 0
         self.aces = 0
 
@@ -77,7 +77,7 @@ class Hand:
         if card.rank == "A":
             self.aces += 1
 
-    # Adjust for aces depending on the current hand value
+    # Adjust for aces depending on the hand value
     def adjust_for_ace(self):
         while self.value > 21 and self.aces:
             self.value -= 10
@@ -154,9 +154,7 @@ def main():
         print("\n-----------------------------------------")
         print("          Welcome to BlackJack")
         print("-----------------------------------------")
-        print(
-            "Try getting as close to 21 as you can without going over.\nDealer hits until 17."
-        )
+        print("Try getting as close to 21 as you can without going over.\nDealer hits until 17.")
 
         player_hand = Hand()
         dealer_hand = Hand()
