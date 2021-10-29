@@ -114,41 +114,39 @@ class Actions:
     # Shows both player cards but only one dealer card
     @staticmethod
     def show_some(player, dealer):
-        print(Fore.GREEN + f"\nPlayer's hand is:{Style.RESET_ALL}", *player.cards, sep="\n")
+        print(Fore.GREEN + f"\nPlayers hand is:{Style.RESET_ALL}", *player.cards, sep="\n")
         print(Fore.GREEN + f"Hand value:{Style.RESET_ALL}", player.value, sep="\n")
-        print(Fore.RED + f"\nDealer's hand:{Style.RESET_ALL}")
+        print(Fore.RED + f"\nDealers hand:{Style.RESET_ALL}")
         print("<hidden card>")
         print(f"{dealer.cards[1]}")
-        # print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
-        # print("\nDealer's hand:")
-        # print("<hidden card>")
-        # print("", dealer.cards[1])
 
     # Shows all cards when the round is finished
     @staticmethod
     def show_all(player, dealer):
-        print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
-        print("Dealer's hand:", *dealer.cards, "Hand value:", dealer.value, sep="\n")
+        print(Fore.GREEN + f"\nPlayers hand is:{Style.RESET_ALL}", *player.cards, sep="\n")
+        print(Fore.GREEN + f"Hand value:{Style.RESET_ALL}", player.value, sep="\n")
+        print(Fore.RED + f"\nDealers hand:{Style.RESET_ALL}", *dealer.cards,sep="\n")
+        print(Fore.RED + f"Hand value:{Style.RESET_ALL}", dealer.value, sep="\n")
 
     @staticmethod
     def player_busts():
-        print("\n<--- Player busts! --->")
+        print(Fore.BLUE + "\n<--- Player busts! --->", Style.RESET_ALL)
 
     @staticmethod
     def player_wins():
-        print("\n<--- Player wins! --->")
+        print(Fore.BLUE + "\n<--- Player wins! --->", Style.RESET_ALL)
 
     @staticmethod
     def dealer_busts():
-        print("\n<--- Dealer busts! --->")
+        print(Fore.BLUE + "\n<--- Dealer busts! --->", Style.RESET_ALL)
 
     @staticmethod
     def dealer_wins():
-        print("\n<--- Dealer wins! --->")
+        print(Fore.BLUE + "\n<--- Dealer wins! --->", Style.RESET_ALL)
 
     @staticmethod
     def push():
-        print("\nIt's a tie.")
+        print(Fore.BLUE + "\nIt's a tie.", Style.RESET_ALL)
 
 
 def main():
