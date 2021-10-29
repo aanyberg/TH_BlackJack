@@ -1,7 +1,7 @@
 import random
 import time
 import os
-from terminal_color import color_print
+from colorama import Fore, Back, Style
 
 # Globals
 running = True
@@ -114,10 +114,15 @@ class Actions:
     # Shows both player cards but only one dealer card
     @staticmethod
     def show_some(player, dealer):
-        print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
-        print("\nDealer's hand:")
+        print(Fore.GREEN + f"\nPlayer's hand is:{Style.RESET_ALL}", *player.cards, sep="\n")
+        print(Fore.GREEN + f"Hand value:{Style.RESET_ALL}", player.value, sep="\n")
+        print(Fore.RED + f"\nDealer's hand:{Style.RESET_ALL}")
         print("<hidden card>")
-        print("", dealer.cards[1])
+        print(f"{dealer.cards[1]}")
+        # print("\nPlayer's hand is:", *player.cards, "Hand value:", player.value, sep="\n")
+        # print("\nDealer's hand:")
+        # print("<hidden card>")
+        # print("", dealer.cards[1])
 
     # Shows all cards when the round is finished
     @staticmethod
