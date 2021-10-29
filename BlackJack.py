@@ -1,6 +1,7 @@
 import random
 import time
 import os
+from terminal_color import color_print
 
 # Globals
 running = True
