@@ -2,7 +2,6 @@ import random
 import time
 import os
 from colorama import Fore, Style
-from timing import time_this
 
 # Globals
 running = True
