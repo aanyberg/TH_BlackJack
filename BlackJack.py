@@ -2,6 +2,7 @@ import random
 import time
 import os
 from colorama import Fore, Style
+from timing import time_this
 
 # Globals
 running = True
@@ -51,11 +52,7 @@ class Card:
 class Deck:
     # Creates 6 decks of cards and shuffles all the cards
     def __init__(self):
-        self.deck = []
-
-        for suit in suits:
-            for rank in ranks * 6:
-                self.deck.append(Card(suit, rank))
+        self.deck = [Card(suit, rank) for rank in ranks * 6 for suit in suits]
         self.shuffle()
 
     def shuffle(self):
