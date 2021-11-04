@@ -5,7 +5,7 @@ from colorama import Fore, Style
 
 # Globals
 running = True
-suits = ["\u2666", "\u2665", "\u2663", "\u2660"]
+suits = ["\u2666", "\u2665", "\u2663", "\u2660"]  # Diamonds, Hearts, Clubs, Spades
 ranks = (
     "2",
     "3",
@@ -53,6 +53,9 @@ class Deck:
     def __init__(self):
         self.deck = [Card(suit, rank) for rank in ranks * 6 for suit in suits]
         self.shuffle()
+
+    def __len__(self):
+        return len(self.deck)
 
     def shuffle(self):
         random.shuffle(self.deck)
@@ -121,7 +124,7 @@ class Actions:
     def show_all(player, dealer):
         print(Fore.GREEN + f"\nPlayers hand is:{Style.RESET_ALL}", *player.cards, sep="\n")
         print(Fore.GREEN + f"Hand value:{Style.RESET_ALL}", player.value, sep="\n")
-        print(Fore.RED + f"\nDealers hand:{Style.RESET_ALL}", *dealer.cards,sep="\n")
+        print(Fore.RED + f"\nDealers hand:{Style.RESET_ALL}", *dealer.cards, sep="\n")
         print(Fore.RED + f"Hand value:{Style.RESET_ALL}", dealer.value, sep="\n")
 
     @staticmethod
